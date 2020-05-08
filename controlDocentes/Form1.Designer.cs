@@ -31,10 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.txtuser = new System.Windows.Forms.TextBox();
             this.txtpass = new System.Windows.Forms.TextBox();
-            this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.label1 = new System.Windows.Forms.Label();
             this.btnlogin = new System.Windows.Forms.Button();
             this.linkpass = new System.Windows.Forms.LinkLabel();
@@ -52,6 +52,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(250, 330);
             this.panel1.TabIndex = 6;
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             // 
             // shapeContainer1
             // 
@@ -65,9 +66,20 @@
             this.shapeContainer1.TabIndex = 7;
             this.shapeContainer1.TabStop = false;
             // 
+            // lineShape2
+            // 
+            this.lineShape2.BorderColor = System.Drawing.Color.DimGray;
+            this.lineShape2.Enabled = false;
+            this.lineShape2.Name = "lineShape2";
+            this.lineShape2.X1 = 287;
+            this.lineShape2.X2 = 729;
+            this.lineShape2.Y1 = 163;
+            this.lineShape2.Y2 = 163;
+            // 
             // lineShape1
             // 
             this.lineShape1.BorderColor = System.Drawing.Color.DimGray;
+            this.lineShape1.Enabled = false;
             this.lineShape1.Name = "lineShape1";
             this.lineShape1.X1 = 288;
             this.lineShape1.X2 = 730;
@@ -83,7 +95,7 @@
             this.txtuser.Location = new System.Drawing.Point(290, 72);
             this.txtuser.Name = "txtuser";
             this.txtuser.Size = new System.Drawing.Size(443, 20);
-            this.txtuser.TabIndex = 8;
+            this.txtuser.TabIndex = 1;
             this.txtuser.Text = "USER";
             this.txtuser.Enter += new System.EventHandler(this.texuser_Enter);
             this.txtuser.Leave += new System.EventHandler(this.txtuser_Leave);
@@ -97,20 +109,11 @@
             this.txtpass.Location = new System.Drawing.Point(287, 140);
             this.txtpass.Name = "txtpass";
             this.txtpass.Size = new System.Drawing.Size(443, 20);
-            this.txtpass.TabIndex = 9;
+            this.txtpass.TabIndex = 2;
             this.txtpass.Text = "PASSWORD";
-            // 
-            // lineShape2
-            // 
-            this.lineShape2.BorderColor = System.Drawing.Color.DimGray;
-            this.lineShape2.Name = "lineShape2";
-            this.lineShape2.X1 = 287;
-            this.lineShape2.X2 = 729;
-            this.lineShape2.Y1 = 163;
-            this.lineShape2.Y2 = 163;
-            this.lineShape2.Click += new System.EventHandler(this.lineShape2_Click);
-            this.lineShape2.Enter += new System.EventHandler(this.lineShape2_Enter);
-            this.lineShape2.Leave += new System.EventHandler(this.lineShape2_Leave);
+            this.txtpass.Enter += new System.EventHandler(this.txtpass_Enter);
+            this.txtpass.Leave += new System.EventHandler(this.txtpass_Leave);
+            this.txtpass.MouseLeave += new System.EventHandler(this.txtpass_MouseLeave);
             // 
             // label1
             // 
@@ -134,7 +137,7 @@
             this.btnlogin.Location = new System.Drawing.Point(287, 230);
             this.btnlogin.Name = "btnlogin";
             this.btnlogin.Size = new System.Drawing.Size(446, 40);
-            this.btnlogin.TabIndex = 11;
+            this.btnlogin.TabIndex = 3;
             this.btnlogin.Text = "ACCEDER";
             this.btnlogin.UseVisualStyleBackColor = false;
             // 
@@ -147,7 +150,7 @@
             this.linkpass.Location = new System.Drawing.Point(416, 287);
             this.linkpass.Name = "linkpass";
             this.linkpass.Size = new System.Drawing.Size(187, 17);
-            this.linkpass.TabIndex = 12;
+            this.linkpass.TabIndex = 0;
             this.linkpass.TabStop = true;
             this.linkpass.Text = "¿Has olvidado contraseña?";
             // 
@@ -160,6 +163,7 @@
             this.btncerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btncerrar.TabIndex = 13;
             this.btncerrar.TabStop = false;
+            this.btncerrar.Click += new System.EventHandler(this.btncerrar_Click);
             // 
             // btnminimizar
             // 
@@ -170,6 +174,7 @@
             this.btnminimizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.btnminimizar.TabIndex = 14;
             this.btnminimizar.TabStop = false;
+            this.btnminimizar.Click += new System.EventHandler(this.btnminimizar_Click);
             // 
             // Form1
             // 
@@ -191,6 +196,7 @@
             this.Opacity = 0.9D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.btncerrar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnminimizar)).EndInit();
             this.ResumeLayout(false);
