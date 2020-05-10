@@ -27,5 +27,22 @@ namespace controlDocentes
         {
 
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Form form3 = new Form3();
+            form3.Show();
+
+        }
+
+        private void btncerrar_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnminimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
     }
 }

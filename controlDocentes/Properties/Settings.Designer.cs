@@ -18,6 +18,7 @@ namespace controlDocentes.Properties
     {
 
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
+        internal string trabajadoresConnectionString;
 
         public static Settings Default
         {
