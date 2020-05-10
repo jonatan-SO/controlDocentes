@@ -57,7 +57,7 @@ namespace controlDocentes
         {
              
         }
-
+        //--------------------AGREGAR----------------------------//
         private void button1_Click(object sender, EventArgs e)
         {
             string servidor = "";
@@ -101,27 +101,147 @@ namespace controlDocentes
                     {
                         conexionBD.Close();
                     }
-
-
-
-
-                }
-
-                    
-
+                }                    
             }
             catch (FormatException fex)
             {
                 MessageBox.Show("Datos incorrectos: " + fex.Message);
+            }                                 
+
+
+        }
+        //--------------------MODIFICAR----------------------------//
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string servidor = "";
+            string puerto = "";
+            string usuario = "";
+            string password = "";
+
+            string cadenaConexion = "server='localhost'" + servidor + "; port='3307'" + puerto + "; user id='root'" + usuario + "; password='root'" + password + "; database=SeguimientoAclase;";
+
+            try
+            {
+                MySqlConnection conexionBD = new MySqlConnection(cadenaConexion);
+                conexionBD.Open();
+
+                if (textBox1.Text != "" && textBox2.Text != "" && textBox3.Text != "")
+                {
+                    comando = new MySqlCommand("update grupo set id_grupo=@id_grupo,jefe_grupo=@jefe_grupo,carrera=@carrera where id_grupo=@id_grupo", conexionBD); //instruccion sql para modificar
+                    comando.Parameters.Add("@id_grupo", MySqlDbType.VarChar).Value = textBox1.Text; //lo que se ingrese en el textbox1 se modificará y se almacenará  en el campo  id_Trabajador
+                    comando.Parameters.Add("@jefe_grupo", MySqlDbType.VarChar).Value = textBox2.Text;//lo que se ingrese en el textbox2 se modificará y se almacenará  en el campo nombre
+                    comando.Parameters.Add("@carrera", MySqlDbType.VarChar).Value = textBox3.Text;
+
+                    comando.ExecuteNonQuery(); // instruccion para ejecutar los comandos para agregar parametros
+
+                    MessageBox.Show("registro correcto, registro modificado");//mensaje al usuario que realizo correctamente la modificacion
+                }
+
+                conexionBD.Close(); //se cierra la conexion
+
+
+
             }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Error al guardar: " + ex.Message);
+
+            }
+        }
+        //--------------------BUSCAR----------------------------//
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+
+            string servidor = "";
+            string puerto = "";
+            string usuario = "";
+            string password = "";
+
+            string cadenaConexion = "server='localhost'" + servidor + "; port='3307'" + puerto + "; user id='root'" + usuario + "; password='root'" + password + "; database=SeguimientoAclase;";
+
+            try
+            {
+                MySqlConnection conexionBD = new MySqlConnection(cadenaConexion);
+                conexionBD.Open();
+                if( textBox1.Text != "" && textBox2.Text == "" && textBox3.Text == "")
+                {
+                    comando = new MySqlCommand("select * from grupo where id_grupo='" + textBox1.Text + "'", conexionBD);// se almacena la instruccion sql(consulta sql) para mostrar todos los datos  de la clave introducida por el usuario en el textbox3 que está aún lado del boton de buscar, todo esto por medio de la variable conexion que almacena la cadena de conexion
+                    lector = comando.ExecuteReader(); // la variable lector almacenara los resultados de la ejecucion del comando
+
+                }
+                else
+                {
+                    if (textBox1.Text == "" && textBox2.Text != "" && textBox3.Text == "")
+                    {
+                        comando = new MySqlCommand("select * from grupo where jefe_grupo='" + textBox2.Text + "'", conexionBD);// se almacena la instruccion sql(consulta sql) para mostrar todos los datos  de la clave introducida por el usuario en el textbox3 que está aún lado del boton de buscar, todo esto por medio de la variable conexion que almacena la cadena de conexion
+                        lector = comando.ExecuteReader(); // la variable lector almacenara los resultados de la ejecucion del comando
+                    }
+                    else
+                    {
+                        if (textBox1.Text == "" && textBox2.Text == "" && textBox3.Text != "")
+                        {
+                            comando = new MySqlCommand("select * from grupo where carrera='" + textBox3.Text + "'", conexionBD);// se almacena la instruccion sql(consulta sql) para mostrar todos los datos  de la clave introducida por el usuario en el textbox3 que está aún lado del boton de buscar, todo esto por medio de la variable conexion que almacena la cadena de conexion
+                            lector = comando.ExecuteReader(); // la variable lector almacenara los resultados de la ejecucion del comando
+                        }
+                    }
+
+                }
+                //comando = new MySqlCommand("select * from grupo where id_grupo='" + textBox1.Text + "'", conexionBD);// se almacena la instruccion sql(consulta sql) para mostrar todos los datos  de la clave introducida por el usuario en el textbox3 que está aún lado del boton de buscar, todo esto por medio de la variable conexion que almacena la cadena de conexion
+                //lector = comando.ExecuteReader(); // la variable lector almacenara los resultados de la ejecucion del comando
+
+                if (lector.Read()) // si el lector obtiene datos de la consulta, es decir, si el lector lee
+                { //entonces
+                  //muestra lo que hay en el panel, el panel es un elemento que permite agrupar más elementos, solo es para que se vea más ordenado
+                    textBox1.Text = lector["id_grupo"].ToString(); // al textbox1 se la va asignar lo que lector haya leído  con el campo id_grupo
+                    textBox2.Text = lector["jefe_grupo"].ToString(); // al textbox2 se le va asignar lo que el lector tenga en el campo jefe_grupo
+                    textBox3.Text = lector["carrera"].ToString(); 
+                    
+                    //todo esto es para que en cada elemento donde el usuario modificará posteriormente, se puede consultar los datos que ya están registrados
+                }
+                else
+                { //de lo contrario, es decir si el id_trabajador no existe o no se encuentra registrado 
+
+                    MessageBox.Show("la clave no existe"); // mensaje al usuario de la clave incorrecta
+                }
+                conexionBD.Close(); //se cierra la
 
 
 
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Error al BUSCAR: " + ex.Message);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            string servidor = "";
+            string puerto = "";
+            string usuario = "";
+            string password = "";
+
+            string cadenaConexion = "server='localhost'" + servidor + "; port='3307'" + puerto + "; user id='root'" + usuario + "; password='root'" + password + "; database=SeguimientoAclase;";
 
 
+            try
+            {
+                MySqlConnection conexionBD = new MySqlConnection(cadenaConexion);
+                conexionBD.Open();
 
 
+                comando = new MySqlCommand("delete from grupo where id_grupo='" + textBox1.Text + "'", conexionBD); // el la varibale comando siempre va la instruccion sql  de lo que se desea hacer, en este caso de eliminar un registro, pormedio del campo id_trabajador
+                comando.ExecuteNonQuery(); // se ejecuta el comando, es decir la eliminación
+                MessageBox.Show("registro eliminado"); //se manda un mensaje de ke se realizó correctamente la eliminacion
+                conexionBD.Close();  // se cierra la conexion, la conexion siempre se debe abrir y cerrar, si se deja abierta puede causar daños
 
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Error al ELIMINAR EL REGISTTRO: " + ex.Message);
+            }
         }
     }
 }
