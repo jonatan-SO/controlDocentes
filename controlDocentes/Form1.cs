@@ -122,5 +122,28 @@ namespace controlDocentes
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
+
+        private void btnlogin_Click(object sender, EventArgs e)
+        {
+            if (txtuser.Text == "jon" && txtpass.Text == "123")
+            {
+                txtuser.Clear();
+                txtpass.Clear();
+                Program.form1.Hide();
+                Form2 form2 = new Form2();
+                form2.Show();
+
+                
+            }
+            else
+            {
+                MessageBox.Show("Usuario o Contraseña Incorrecta");
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
