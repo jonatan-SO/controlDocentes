@@ -25,13 +25,14 @@ namespace controlDocentes
 
         private void Form2_Load(object sender, EventArgs e)
         {
-           
+            Form form3 = new Form3();
+            form3.Show();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            Form form3 = new Form3();
-            form3.Show();
+            Form form2 = new Form2();
+            form2.Show();
 
         }
 

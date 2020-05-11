@@ -246,5 +246,10 @@ namespace controlDocentes
                 MessageBox.Show("Error al ELIMINAR EL REGISTTRO: " + ex.Message);
             }
         }
+
+        private void Form3_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
