@@ -25,7 +25,7 @@ namespace controlDocentes
 
         private void Form2_Load(object sender, EventArgs e)
         {
-
+           
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -43,6 +43,12 @@ namespace controlDocentes
         private void btnminimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            Form form4 = new Form4();
+            form4.Show();
         }
     }
 }
